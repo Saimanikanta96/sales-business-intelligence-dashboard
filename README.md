@@ -46,3 +46,34 @@ Python • Pandas • SQL • Power BI/dashboard concepts • Git/GitHub
 ## Recruiter Takeaway
 This project demonstrates practical analytics workflow: defining business questions, preparing data, writing SQL, calculating KPIs, designing decision-useful visuals, and communicating findings without inventing results.
 
+
+
+## Step 3 — Data Cleaning, Validation & EDA
+
+The repository now contains an executable, source-data-driven pipeline for the verified 21-column Sample Superstore schema.
+
+### Pipeline
+- `src/data_cleaning.py` — auto-discovers CSV/XLS/XLSX in `data/raw/`, validates the exact schema, parses dates/numerics, profiles missing values/duplicates/types/date range/unique entities, and writes processed data.
+- `src/analysis.py` — generates monthly, category, sub-category, regional, segment, customer, product, and discount-band analysis tables.
+- `src/visualization.py` — generates reproducible PNG charts for sales trends, category sales, regional profit, sub-category profit, and discount vs profit.
+- `notebooks/sales_analysis.ipynb` — executable Jupyter workflow using the same pipeline.
+- `sql/01_*.sql` through `sql/07_*.sql` — PostgreSQL-oriented analysis queries using the verified column names.
+
+### Current execution status
+**CODE PIPELINE BUILT — DATA EXECUTION PENDING**
+
+The source dataset was not available in the execution environment during this build. Therefore, no missing-value counts, duplicate counts, KPIs, findings, or charts are claimed as executed. The scripts fail clearly when the source file is absent rather than generating fake results.
+
+### To execute locally
+1. Download the official Tableau Public **Superstore Sales** sample dataset.
+2. Place the downloaded CSV/XLS/XLSX file in `data/raw/`.
+3. Run:
+
+```bash
+pip install -r requirements.txt
+python src/data_cleaning.py
+python src/analysis.py
+python src/visualization.py
+```
+
+Open `notebooks/sales_analysis.ipynb` for the interactive EDA workflow. Generated tables go to `reports/` and charts to `visualizations/`.
