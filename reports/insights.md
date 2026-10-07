@@ -1,18 +1,16 @@
-# Business Insights
+# Insights
 
-Populate this file only after running the analysis against the documented public dataset.
+> **Status: Pending execution with source dataset**
 
-## Insight template
+No business findings are reported yet. This file will contain only findings generated from the actual source dataset after the pipeline runs.
 
-### Finding 1
-**Observation:** What happened?
+## Planned analysis
+- Sales and profit trend over time
+- Category and sub-category performance
+- Regional performance
+- Customer contribution
+- Product performance
+- Segment performance
+- Discount/profitability association
 
-**Evidence:** Metric, segment, and period.
-
-**Business implication:** Why does it matter?
-
-**Recommended action:** What should a decision-maker do next?
-
-Repeat for the most important 3–5 findings.
-
-> No fabricated results are included.
+The project will distinguish observed associations from causal claims. Running the scripts without the source dataset is intentionally blocked with a clear error; no placeholder statistics are used.
