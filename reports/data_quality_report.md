@@ -1,37 +1,39 @@
 # Data Quality Report
 
-> **Status: Pending execution with source dataset**
+## Execution status
 
-This report is intentionally a template. No data-quality result is asserted here until the source dataset is present in `data/raw/` and the validation pipeline is executed.
+REAL DATA EXECUTION COMPLETE using the uploaded sample_-_superstore.xlsx workbook.
 
-## Expected source
-- Dataset: Tableau Public **Superstore Sales / Sample - Superstore**
-- Official source: https://public.tableau.com/app/learn/sample-data
-- Expected schema: 21 columns documented in `data/README.md`.
+The workbook contains Orders, People, and Returns sheets. This analysis uses the Orders sheet because it contains the row-level sales transaction fields.
 
-## Checks performed by the pipeline
-1. File discovery and readable format (CSV/XLS/XLSX)
-2. Exact schema validation
-3. Actual row/column count
-4. Missing values by column and total missing cells
-5. Exact duplicate row count
-6. Data types after parsing
-7. Order-date range
-8. Unique customers, orders, and products
-9. Numeric validity for Sales, Quantity, Discount, and Profit
-10. Ship Date earlier than Order Date
+## Dataset profile
 
-## Execution
-Run:
+| Check | Result |
+|---|---:|
+| Rows | 10,194 |
+| Columns | 21 |
+| Order date range | 2023-01-03 to 2026-12-30 |
+| Unique orders | 5,111 |
+| Unique customers | 804 |
+| Unique products | 1,862 |
+| Duplicate rows | 0 |
+| Missing cells | 0 |
+| Negative sales | 0 |
+| Non-positive quantity | 0 |
+| Invalid discount | 0 |
+| Ship date before order date | 0 |
+| Order dates after 2026-10-07 | 1,159 |
 
-```bash
-pip install -r requirements.txt
-python src/data_cleaning.py
-python src/analysis.py
-python src/visualization.py
-```
+## Observed schema
 
-The scripts fail clearly if the dataset is missing; they do not invent values.
+Row ID, Order ID, Order Date, Ship Date, Ship Mode, Customer ID, Customer Name, Segment, Country/Region, City, State/Province, Postal Code, Region, Product ID, Category, Sub-Category, Product Name, Sales, Quantity, Discount, Profit.
 
-## Results
-**Not yet executed in this repository because the source dataset file is not present in the execution environment.**
+## Data-quality interpretation
+
+The transaction table is structurally clean: no missing cells or duplicate rows were observed, and the basic numeric and date validation checks passed.
+
+One important issue requires documentation: 1,159 order rows have dates after the execution date of 2026-10-07, extending through 2026-12-30. These rows were not deleted. A real operational dashboard should confirm whether they are sample/forecast dates or apply an explicit reporting cutoff.
+
+## Data handling
+
+The raw workbook is not committed to the public repository. The repository contains reproducible code, derived analysis tables, documentation, and visualization artifacts.
