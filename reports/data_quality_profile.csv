@@ -1,0 +1,13 @@
+metric,value
+rows,10194
+columns,21
+duplicate_rows,0
+missing_cells,0
+unique_orders,5111
+unique_customers,804
+unique_products,1862
+negative_sales,0
+invalid_quantity,0
+invalid_discount,0
+ship_before_order,0
+future_order_dates_as_of_2026-10-07,1159
