@@ -1,79 +1,82 @@
 # Sales Business Intelligence Dashboard
 
-An end-to-end sales analytics portfolio project demonstrating data cleaning, KPI design, SQL business analysis, Python analysis, and dashboard storytelling.
+End-to-end sales analytics portfolio project demonstrating data validation, cleaning, SQL business analysis, Python EDA, KPI design, visualization, and business storytelling.
 
-## Business Goals
-- Track revenue, profit, orders, and average order value.
-- Identify high-performing products, categories, and regions.
-- Understand sales trends over time.
-- Convert analysis into concise, decision-oriented insights.
+## Dataset executed
 
-## Repository Structure
-```
-data/
-  README.md
-  raw/.gitkeep
-sql/business_questions.sql
-src/sales_analysis.py
-dashboard/dashboard_spec.md
-reports/insights.md
-requirements.txt
-.gitignore
-README.md
-```
+The uploaded Tableau Superstore workbook was analyzed directly.
 
-## Dataset & Data Integrity
-The project uses a legitimate public dataset. The exact publisher, source URL, license/usage terms, download date, schema, and transformations are documented in `data/README.md`. No fabricated business results are included.
+- File: sample_-_superstore.xlsx
+- Sheet: Orders
+- Rows: 10,194
+- Columns: 21
+- Order dates: 2023-01-03 to 2026-12-30
+- Duplicate rows: 0
+- Missing cells: 0
+- Orders: 5,111
+- Customers: 804
+- Products: 1,862
 
-## Core Questions
-1. What are total revenue, profit, orders, and average order value?
-2. How do revenue and profit change by month?
-3. Which categories and products drive revenue?
-4. Which regions perform best?
-5. Which segments require investigation?
+The raw workbook is not committed because the official sample-data pages do not provide a clear open-source redistribution license.
 
-## Tech Stack
-Python • Pandas • SQL • Power BI/dashboard concepts • Git/GitHub
+## Executive snapshot
 
-## Reproducibility
-1. Install Python 3.10+.
-2. Run `pip install -r requirements.txt`.
-3. Download the documented public dataset and place it in `data/raw/`.
-4. Map source columns to the canonical fields expected by `src/sales_analysis.py`.
-5. Run `python src/sales_analysis.py`.
-6. Use the generated KPI output for the dashboard and findings.
+| KPI | Result |
+|---|---:|
+| Sales | $2.33M |
+| Profit | $292.30K |
+| Profit margin | 12.56% |
+| Orders | 5,111 |
+| Customers | 804 |
+| Products | 1,862 |
+| Average sales / order | $455.20 |
 
-## Recruiter Takeaway
-This project demonstrates practical analytics workflow: defining business questions, preparing data, writing SQL, calculating KPIs, designing decision-useful visuals, and communicating findings without inventing results.
+## Key findings
 
+- Technology leads sales and profit: $839.89K sales and $146.54K profit.
+- West leads regions: $739.81K sales and $110.80K profit.
+- Tables require profitability attention: $208.02K sales but -$17.75K profit.
+- Annual sales rose from $494.04K in 2023 to $745.57K in 2026, but 1,159 rows are dated after 2026-10-07. This trend therefore needs a reporting cutoff before being treated as current operational performance.
+- Rows with discounts above 20% show $364.76K sales and -$136.02K profit. This is an observed association, not a causal claim.
 
+## Repository structure
 
-## Step 3 — Data Cleaning, Validation & EDA
+    data/
+      README.md
+      raw/.gitkeep
+    sql/
+      01_sales_overview.sql
+      02_monthly_sales.sql
+      03_product_performance.sql
+      04_customer_analysis.sql
+      05_regional_analysis.sql
+      06_profitability_analysis.sql
+      07_discount_analysis.sql
+    src/
+      data_cleaning.py
+      analysis.py
+      visualization.py
+    reports/
+      data_quality_report.md
+      data_quality_profile.csv
+      insights.md
+      category_performance.csv
+      regional_performance.csv
+      subcategory_performance.csv
+    notebooks/
+      sales_analysis.ipynb
 
-The repository now contains an executable, source-data-driven pipeline for the verified 21-column Sample Superstore schema.
+## Reproducible workflow
 
-### Pipeline
-- `src/data_cleaning.py` — auto-discovers CSV/XLS/XLSX in `data/raw/`, validates the exact schema, parses dates/numerics, profiles missing values/duplicates/types/date range/unique entities, and writes processed data.
-- `src/analysis.py` — generates monthly, category, sub-category, regional, segment, customer, product, and discount-band analysis tables.
-- `src/visualization.py` — generates reproducible PNG charts for sales trends, category sales, regional profit, sub-category profit, and discount vs profit.
-- `notebooks/sales_analysis.ipynb` — executable Jupyter workflow using the same pipeline.
-- `sql/01_*.sql` through `sql/07_*.sql` — PostgreSQL-oriented analysis queries using the verified column names.
+1. Keep the raw workbook outside the public repository unless redistribution rights are confirmed.
+2. Place a local copy in data/raw/.
+3. Install dependencies: pip install -r requirements.txt
+4. Run: python src/data_cleaning.py
+5. Run: python src/analysis.py
+6. Run: python src/visualization.py
 
-### Current execution status
-**CODE PIPELINE BUILT — DATA EXECUTION PENDING**
+The pipeline reads the Orders sheet, validates the exact 21-column schema, cleans dates and numeric fields, profiles data quality, creates analysis tables, and generates charts.
 
-The source dataset was not available in the execution environment during this build. Therefore, no missing-value counts, duplicate counts, KPIs, findings, or charts are claimed as executed. The scripts fail clearly when the source file is absent rather than generating fake results.
+## Recruiter takeaway
 
-### To execute locally
-1. Download the official Tableau Public **Superstore Sales** sample dataset.
-2. Place the downloaded CSV/XLS/XLSX file in `data/raw/`.
-3. Run:
-
-```bash
-pip install -r requirements.txt
-python src/data_cleaning.py
-python src/analysis.py
-python src/visualization.py
-```
-
-Open `notebooks/sales_analysis.ipynb` for the interactive EDA workflow. Generated tables go to `reports/` and charts to `visualizations/`.
+This project demonstrates a practical analyst workflow from source-data validation to cleaning, SQL, Python EDA, KPI analysis, visualization, and decision-oriented communication. Reported numbers come from the uploaded workbook, not fabricated examples.
